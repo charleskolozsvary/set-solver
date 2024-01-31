@@ -11,8 +11,8 @@ import time
 
 DISPLAY_SET_COLOR = (25, 75, 225)
 LABEL_COLOR = (50, 120, 225)
-CONTOUR_WIDTH_PROP = 0.0001
-TEXT_SCALING_PROP = 0.0000135
+CONTOUR_WIDTH_PROP = 0.0003
+TEXT_SCALING_PROP = 0.0000075
 MIN_CONTOUR_DRAW_WIDTH = 12
 MIN_TEXT_SIZE = 2.5
 MAX_DISPLAY_TIME = 8
@@ -52,7 +52,7 @@ def displaySets(originalImage, sets, cardContours, cardCenters, labels):
         area = cv.contourArea(cnt)
         drawing_widths.append(max(MIN_CONTOUR_DRAW_WIDTH, int(CONTOUR_WIDTH_PROP * area)))
         text_size = max(MIN_TEXT_SIZE, area * TEXT_SCALING_PROP)
-        cv.putText(labeledImg, label, cardCenters[i], cv.FONT_HERSHEY_SIMPLEX, text_size, LABEL_COLOR, int(text_size), 2)
+        cv.putText(labeledImg, label, cardCenters[i], cv.FONT_HERSHEY_SIMPLEX, text_size, LABEL_COLOR, int(text_size * 2), 2)
     total_time = time.time() - s1
     solutions = []
     for set in sets:
