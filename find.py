@@ -12,9 +12,9 @@ import time
 DISPLAY_SET_COLOR = (25, 75, 225)
 LABEL_COLOR = (50, 120, 225)
 CONTOUR_WIDTH_PROP = 0.0003
-TEXT_SCALING_PROP = 0.000000001
+TEXT_SCALING_PROP = 0.0000125
 MIN_CONTOUR_DRAW_WIDTH = 12
-MIN_TEXT_SIZE = 2.5
+MIN_TEXT_SIZE = 1
 MAX_DISPLAY_TIME = 8
 
 FEATURES = [['R', 'G', 'P'], ['RH', 'OV', 'SQ'], ['1', '2', '3'], ['F', 'E', 'D']]
@@ -52,7 +52,7 @@ def displaySets(originalImage, sets, cardContours, cardCenters, labels):
         area = cv.contourArea(cnt)
         drawing_widths.append(max(MIN_CONTOUR_DRAW_WIDTH, int(CONTOUR_WIDTH_PROP * area)))
         text_size = max(MIN_TEXT_SIZE, area * TEXT_SCALING_PROP)
-        cv.putText(labeledImg, label, cardCenters[i], cv.FONT_HERSHEY_SIMPLEX, text_size, LABEL_COLOR, int(text_size * 2), 2)
+        cv.putText(labeledImg, label, cardCenters[i], cv.FONT_HERSHEY_SIMPLEX, text_size, LABEL_COLOR, int(text_size * 3), 2)
     total_time = time.time() - s1
     solutions = []
     for set in sets:
@@ -89,19 +89,16 @@ def removeDuplicateCards(contours, positions, labels, center_of_img, imgs, orig_
         key = ':'.join([label[0][0], label[1][:2], label[2][0], label[3][0]]).upper()
         if key in cards.keys():
             st.write('duplicate handeled...')
-            if dist(positions[i], center_of_img) < dist(positions[cards[key][1]], center_of_img):
-                remove_insert(unique_contours, contours[cards[key][1]], contours[i], cards[key][0])
-                remove_insert(unique_positions, positions[cards[key][1]], positions[i], cards[key][0])
+            if dist(positions[i], center_of_img) < dist(unique_positions[cards[key]], center_of_img):
+                remove_insert(unique_contours, unique_contours[cards[key]], contours[i], cards[key])
+                remove_insert(unique_positions, unique_positions[cards[key]], positions[i], cards[key])
             continue
         else:
-            cards[key] = (card_idx, i)
+            cards[key] = card_idx
             unique_contours.append(contours[i].copy())
             unique_positions.append(positions[i])
             card_idx += 1
-    final_cards = {}
-    for key in cards:
-        final_cards[key] = cards[key][0]
-    return final_cards, unique_contours, unique_positions
+    return cards, unique_contours, unique_positions
     
     
 def find_sets(orig_img): #img is in RGB
