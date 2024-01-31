@@ -11,7 +11,6 @@ def solve(img):
     return find.find_sets(img)
 
 def main_loop():
-    ess = time.time()
     st.title("Set Solver")
     st.write('Note: an assertion error will trigger if the script runs for more than 20 seconds. Streamlit seems to lose connection when this happens...')
     s1 = time.time()
@@ -39,8 +38,7 @@ def main_loop():
         st.header("There are "+str(len(solutions))+" sets" if len(solutions) >= 2 else "There is 1 set")
         for solution in solutions:
             st.image(solution)
-    enn = time.time()
-    st.header('total time (for real?): '+str(enn-ess))
+    
         
 if __name__ == '__main__':
     main_loop()
