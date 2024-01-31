@@ -5,6 +5,7 @@ from PIL import Image
 from PIL import ImageOps
 import find
 import time
+#current link to view this script via streamlit: https://setcardgamesolver-cqcwmbfqnrgtv4ohvo4uk8.streamlit.app/
 
 def solve(img):
     return find.find_sets(img)
