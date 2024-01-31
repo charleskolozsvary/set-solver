@@ -13,6 +13,7 @@ def solve(img):
 def main_loop():
     ess = time.time()
     st.title("Set Solver")
+    st.write('Note: an assertion error will trigger if the script takes more than 15 seconds...')
     s1 = time.time()
     upload = st.file_uploader("Upload an image", type=['jpg', 'png', 'jpeg'])
     img = None
