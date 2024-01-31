@@ -5,7 +5,7 @@ import streamlit as st
 import numpy as np
 import time
 
-MAX_TIME = 10
+MAX_TIME = 12
 
 RED_RANGE = [(0, 100, 100), (22, 255, 255)] #[(0, 100, 100), ...]
 PURPLE_RANGE = [(115, 0, 0), (175, 255, 255)]
