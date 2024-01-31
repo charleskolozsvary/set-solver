@@ -52,7 +52,7 @@ def displaySets(originalImage, sets, cardContours, cardCenters, labels):
         area = cv.contourArea(cnt)
         drawing_widths.append(max(MIN_CONTOUR_DRAW_WIDTH, int(CONTOUR_WIDTH_PROP * area)))
         text_size = max(MIN_TEXT_SIZE, area * TEXT_SCALING_PROP)
-        cv.putText(labeledImg, label, cardCenters[i], cv.FONT_HERSHEY_SIMPLEX, text_size, LABEL_COLOR, int(text_size * 3), 2)
+        cv.putText(labeledImg, label, cardCenters[i], cv.FONT_HERSHEY_SIMPLEX, text_size, LABEL_COLOR, int(text_size * 2), 2)
     total_time = time.time() - s1
     solutions = []
     for set in sets:
