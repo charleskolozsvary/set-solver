@@ -13,6 +13,7 @@ def solve(img):
 def main_loop():
     st.title("Set Solver")
     st.write('Note: an assertion error will trigger if the script runs for more than 20 seconds. Streamlit seems to lose connection when this happens...')
+    st.write('NB .HEIC images will take longer.')
     s1 = time.time()
     upload = st.file_uploader("Upload an image", type=['jpg', 'png', 'jpeg'])
     img = None
