@@ -12,9 +12,8 @@ def solve(img):
 
 def main_loop():
     st.title("Set Solver")
-    st.write('Note: an assertion error will trigger if the script runs for more than 20 seconds. Streamlit seems to lose connection when this happens...')
+    st.write('Note: an assertion error will trigger if the script runs for more than 25 seconds. Streamlit seems to lose connection when this happens...')
     st.write('NB .HEIC images will take longer.')
-    s1 = time.time()
     upload = st.file_uploader("Upload an image", type=['jpg', 'png', 'jpeg'])
     img = None
     if upload is not None:
@@ -23,9 +22,6 @@ def main_loop():
         img = cv.cvtColor(opencv_image, cv.COLOR_BGR2RGB)
     else:
         return None
-    e1 = time.time()
-    t1 = e1 - s1
-    st.write('time for uploading image: ', t1)
     
     start = time.time()
     solutions, labelings = solve(img)

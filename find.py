@@ -106,21 +106,21 @@ def find_sets(orig_img): #img is in RGB
     cardImages, cardContours, cardCenters = extract.getCardImagesAndTheirContours(orig_img)
     e1 = time.time()
     t1 = e1 - s1
-    st.write('time taken for extract: ', t1)
+    st.write('Time spent extracting cards:', t1)
     s2 = time.time()
     cardLabels = identify.getCardLabels(cardImages)
     e2 = time.time()
     t2 = e2 - s2
-    st.write('time taken for identify: ', t2)
+    st.write('Time spent identifying cards:', t2)
     cards, unique_contours, unique_positions = removeDuplicateCards(cardContours, cardCenters, cardLabels, (orig_img.shape[0] // 2, orig_img.shape[1] // 2), cardImages, orig_img)
     s4 = time.time()
     sets = getSets(cards)
     e4 = time.time()
     t4 = e4 - s4
-    st.write('time taken for getSets: ', t4)
+    st.write('Time spent finding sets:', t4)
     s5 = time.time()
     solutions, labels = displaySets(orig_img, sets, unique_contours, unique_positions, cards.keys())
     e5 = time.time()
     t5 = e5 - s5
-    st.write('time taken for displaySets: ', t5)
+    st.write('Time spent displaying sets:', t5)
     return solutions, labels
